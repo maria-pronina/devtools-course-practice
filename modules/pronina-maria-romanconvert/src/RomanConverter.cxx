@@ -135,13 +135,24 @@ bool RomanConverter::CheckNumeralsRepeats
 bool RomanConverter::CheckForInvalidNumerals
                      (const vector<string>& parsed_roman) {
     auto prev = parsed_roman.front();
+    int  index_of_cur_symbol;
+    int index_of_prev_symbol = find(kSymbols.begin(), kSymbols.end(), prev)
+        - kSymbols.begin();
     for (auto it = parsed_roman.begin()+1; it != parsed_roman.end(); ++it) {
-        if ((*it == "I")|| (*it == "X")|| (*it == "M")|| (*it == "C")) {
-            prev = *it;
-            continue;
-        }
-        if (prev == *it)
+        index_of_cur_symbol = find(kSymbols.begin(), kSymbols.end(), *it)
+                              - kSymbols.begin();
+        int sum = kValues[index_of_prev_symbol] + kValues[index_of_cur_symbol];
+        auto val_it = kValues.begin();
+        while ((*val_it <= sum)&&(val_it != kValues.end()-1))
+            ++val_it;
+        if (sum == *val_it)
             return false;
+        --val_it;
+        if ((kValues[index_of_prev_symbol] < *val_it) &&
+            (kValues[index_of_cur_symbol] < *val_it))
+            return false;
+        prev = *it;
+        index_of_prev_symbol = index_of_cur_symbol;
     }
     return true;
 }

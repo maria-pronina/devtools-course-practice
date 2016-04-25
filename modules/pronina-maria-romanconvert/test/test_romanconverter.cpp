@@ -92,6 +92,15 @@ TEST(RomanConverter_Tests,
      // Assert
      EXPECT_FALSE(is_valid);
 }
+TEST(RomanConverter_Tests,
+    Is_Roman_With_Incorrect_Combination_Of_IVI_Invalid) {
+    // Arrange
+    string roman = "IVI";
+    // Act
+    bool is_valid = RomanConverter::CheckRomanNumber(roman);
+    // Assert
+    EXPECT_FALSE(is_valid);
+}
 TEST(RomanConverter_Tests, Is_Roman_With_Other_Symbols_Invalid) {
      // Arrange
      string roman = "Ia";
