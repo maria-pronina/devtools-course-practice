@@ -43,11 +43,7 @@ std::vector<std::string> RomanConverter::ParseRoman(const std::string& roman) {
                         if (roman[i] == 'I') {
                             state = 1;
                             continue;
-                        }
-                        if (roman[i] == 'X') {
-                            state = 2;
-                            continue;
-                        }
+                        }                        
                         if (roman[i] == 'C') {
                             state = 3;
                             continue;
@@ -74,11 +70,7 @@ std::vector<std::string> RomanConverter::ParseRoman(const std::string& roman) {
                         if (roman[i] == 'X') {
                             state = 2;
                             continue;
-                        }
-                        if (roman[i] == 'C') {
-                            state = 3;
-                            continue;
-                        }
+                        }                        
                     }
                     std::string tmp(1, roman[i]);
                     result.push_back(tmp);

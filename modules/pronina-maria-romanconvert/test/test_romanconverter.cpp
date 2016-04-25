@@ -41,7 +41,7 @@ TEST(RomanConverter_Tests, Is_Greater_Than_Max_arabic_Invalid) {
 }
 TEST(RomanConverter_Tests, Can_Validate_Roman) {
      // Arrange
-     std::string roman = "V";
+     std::string roman = "XCV";
      // Act
      bool is_valid = RomanConverter::CheckRomanNumber(roman);
 
@@ -65,6 +65,15 @@ TEST(RomanConverter_Tests, Is_Roman_With_Four_Repeats_Invalid) {
 
      // Assert
      EXPECT_FALSE(is_valid);
+}
+TEST(RomanConverter_Tests, Is_Roman_With_IC_Invalid) {
+    // Arrange
+    std::string roman = "CDCMICI";
+    // Act
+    bool is_valid = RomanConverter::CheckRomanNumber(roman);
+
+    // Assert
+    EXPECT_FALSE(is_valid);
 }
 TEST(RomanConverter_Tests, Is_Roman_Without_Four_Repeats_Valid) {
      // Arrange
@@ -122,7 +131,7 @@ TEST(RomanConverter_Tests,
 }
 TEST(RomanConverter_Tests, Is_Roman_With_Incorrect_Numerals_Use_Invalid) {
      // Arrange
-     std::string roman = "XLXL";
+     std::string roman = "XLXLI";
      // Act
      bool is_valid = RomanConverter::CheckRomanNumber(roman);
 
