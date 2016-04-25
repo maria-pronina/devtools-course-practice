@@ -180,7 +180,7 @@ bool RomanConverter::CheckRomanNumber(const string& roman) {
     if (!CheckForInvalidSymbols(parsed_roman)) return false;
     if (!CheckNumeralsRepeats(parsed_roman)) return false;
     if (!CheckNumeralsOrder(parsed_roman)) return false;
-    if (!CheckForInvalidNumerals(parsed_roman)) return false;    
+    if (!CheckForInvalidNumerals(parsed_roman)) return false;
     return true;
 }
 
