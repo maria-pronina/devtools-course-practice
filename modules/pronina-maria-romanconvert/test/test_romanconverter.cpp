@@ -266,5 +266,14 @@ TEST(RomanConverter_Tests, Is_CC_Valid) {
     // Assert
     EXPECT_TRUE(is_valid);
 }
+TEST(RomanConverter_Tests, Is_CI_Valid) {
+    // Arrange
+    string roman = "CI";
+    // Act
+    bool is_valid = RomanConverter::CheckRomanNumber(roman);
+    // Assert
+    EXPECT_TRUE(is_valid);
+}
+
 
 
