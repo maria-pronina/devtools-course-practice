@@ -35,8 +35,10 @@ vector<string> RomanConverter::ParseRoman(const string& roman) {
         case 1: {
                 if (roman[i] == 'V') {
                     result.push_back("IV");
+                    state = 0;
                 } else if (roman[i] == 'X') {
                     result.push_back("IX");
+                    state = 0;
                 } else {
                     result.push_back("I");
                     if (i != roman.length() - 1) {
@@ -58,8 +60,10 @@ vector<string> RomanConverter::ParseRoman(const string& roman) {
         case 2: {
                 if (roman[i] == 'L') {
                     result.push_back("XL");
+                    state = 0;
                 } else if (roman[i] == 'C') {
                     result.push_back("XC");
+                    state = 0;
                 } else {
                     result.push_back("X");
                     if (i != roman.length() - 1) {
@@ -81,8 +85,10 @@ vector<string> RomanConverter::ParseRoman(const string& roman) {
         case 3: {
                 if (roman[i] == 'D') {
                     result.push_back("CD");
+                    state = 0;
                 } else if (roman[i] == 'M') {
                     result.push_back("CM");
+                    state = 0;
                 } else {
                     result.push_back("C");
                     if (i != roman.length() - 1) {
@@ -174,7 +180,7 @@ bool RomanConverter::CheckRomanNumber(const string& roman) {
     if (!CheckForInvalidSymbols(parsed_roman)) return false;
     if (!CheckNumeralsRepeats(parsed_roman)) return false;
     if (!CheckNumeralsOrder(parsed_roman)) return false;
-    if (!CheckForInvalidNumerals(parsed_roman)) return false;
+    if (!CheckForInvalidNumerals(parsed_roman)) return false;    
     return true;
 }
 

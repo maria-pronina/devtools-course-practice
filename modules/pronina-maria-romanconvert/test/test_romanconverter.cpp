@@ -129,6 +129,15 @@ TEST(RomanConverter_Tests,
      // Assert
      EXPECT_TRUE(is_valid);
 }
+TEST(RomanConverter_Tests, Is_Roman_XL_Valid) {
+    // Arrange
+    string roman = "XL";
+    // Act
+    bool is_valid = RomanConverter::CheckRomanNumber(roman);
+
+    // Assert
+    EXPECT_TRUE(is_valid);
+}
 TEST(RomanConverter_Tests, Is_Roman_With_Incorrect_Numerals_Use_Invalid) {
      // Arrange
      string roman = "XLXLI";
@@ -148,6 +157,7 @@ TEST(RomanConverter_Tests,
      // Assert
      EXPECT_FALSE(is_valid);
 }
+
 TEST(RomanConverter_Tests, Is_Roman_With_All_Type_Of_Errors_Invalid) {
      // Arrange
      string roman = "IIIIIVa";
