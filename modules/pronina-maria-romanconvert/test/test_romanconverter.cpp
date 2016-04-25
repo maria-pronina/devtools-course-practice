@@ -266,9 +266,9 @@ TEST(RomanConverter_Tests, Is_CC_Valid) {
     // Assert
     EXPECT_TRUE(is_valid);
 }
-TEST(RomanConverter_Tests, Is_CI_Valid) {
+TEST(RomanConverter_Tests, Is_CII_Valid) {
     // Arrange
-    string roman = "CI";
+    string roman = "CII";
     // Act
     bool is_valid = RomanConverter::CheckRomanNumber(roman);
     // Assert
