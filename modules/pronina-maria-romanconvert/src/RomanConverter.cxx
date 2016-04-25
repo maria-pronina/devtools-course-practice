@@ -143,7 +143,7 @@ bool RomanConverter::CheckForInvalidNumerals
                               - kSymbols.begin();
         int sum = kValues[index_of_prev_symbol] + kValues[index_of_cur_symbol];
         auto val_it = kValues.begin();
-        while ((*val_it <= sum)&&(val_it != kValues.end()-1))
+        while ((*val_it <= sum) && (val_it != kValues.end()-1))
             ++val_it;
         if (sum == *val_it)
             return false;
