@@ -77,7 +77,16 @@ bool TODOapp::validateArguments(int argc, const char** argv) {
         case PRINTALL:
             return validateFileOperation(argc, argv);
         break;
+    case ERROR: break;
+    case CREATE:
+        return validateFileOperation(argc, argv);
+        break;
+    case PRIORITY:
+        return validateItemOperation(argc, argv);
+        break;
+    default: break;
     }
+    return true;
 }
 ArgumentsNames TODOapp::parseOperation(string operation) {
     auto it = kOperations.find(operation);
@@ -189,7 +198,7 @@ std::string TODOapp::operator()(int argc, const char** argv) {
         }
     }
     break;
-    case PRIORITY:
+    case PRIORITY: {
         int index_of_item;
         try {
             index_of_item = std::stoi(argv[3]);
@@ -201,15 +210,19 @@ std::string TODOapp::operator()(int argc, const char** argv) {
         auto priority_items = todo.getByPriority(index_of_item);
         if (priority_items.size() == 0) {
             stream << "List does not contains items with this priority"
-                    << std::endl;
-        } else {
+                << std::endl;
+        }
+        else {
             for (auto it = priority_items.begin(); it != priority_items.end();
-                    ++it) {
+                ++it) {
                 stream << (*it).getTitle() << std::endl;
                 stream << (*it).getText() << std::endl;
             }
         }
+    }
     break;
+    case ERROR: break;
+    default: break;
     }
     message_ = stream.str();
     return message_;
