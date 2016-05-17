@@ -188,7 +188,7 @@ TEST(TODOlist, Can_Not_Load_From_Non_Existing_File) {
     // Arrange
     TODOlist listForLoad;
     // Act and Assert
-    EXPECT_THROW(listForLoad.load("todo.list"), std::runtime_error);
+    EXPECT_THROW(listForLoad.load("todo1.list"), std::runtime_error);
 }
 TEST(TODOlist, Can_Not_Load_From_File_With_Empty_Name) {
     // Arrange

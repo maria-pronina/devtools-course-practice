@@ -112,7 +112,7 @@ TEST_F(TODOappTest, Can_Not_Print_With_Wrong_File_Name) {
     Assert("Can not open file .*");
 }
 TEST_F(TODOappTest, Can_Not_Print_Priority_With_Wrong_File_Name) {
-    vector<string> args = { "print_priority", "-1" };
+    vector<string> args = { "print_priority", "-1", "-1"};
     Act(args);
     Assert("Can not open file .*");
 }
