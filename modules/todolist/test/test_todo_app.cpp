@@ -6,6 +6,7 @@
 #include <TODOlist.h>
 #include <TODOapp.h>
 #include <vector>
+#include <string>
 using ::testing::internal::RE;
 using std::vector;
 using std::string;
