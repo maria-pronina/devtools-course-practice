@@ -211,8 +211,7 @@ std::string TODOapp::operator()(int argc, const char** argv) {
         if (priority_items.size() == 0) {
             stream << "List does not contains items with this priority"
                 << std::endl;
-        }
-        else {
+        } else {
             for (auto it = priority_items.begin(); it != priority_items.end();
                 ++it) {
                 stream << (*it).getTitle() << std::endl;
