@@ -74,14 +74,14 @@ set_tests_properties (${prefix}_can_Not_Print_Item_With_Wrong_File_Name
 
 add_test(
     NAME ${prefix}_can_Add_Item
-    COMMAND ${APPLICATION} add "test/data/test.txt" t
+    COMMAND ${APPLICATION} add "test\data\test.txt" t
 )
 set_tests_properties (${prefix}_can_Add_Item
   PROPERTIES PASS_REGULAR_EXPRESSION "Item has been added")
 
 add_test(
     NAME ${prefix}_can_Delete_Item
-    COMMAND ${APPLICATION} delete "test/data/test.txt" t
+    COMMAND ${APPLICATION} delete "test\data\test.txt" t
 )
 set_tests_properties (${prefix}_can_Delete_Item
   PROPERTIES PASS_REGULAR_EXPRESSION "Item has been deleted")
