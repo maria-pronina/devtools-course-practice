@@ -3,17 +3,17 @@
 #include <gtest/gtest.h>
 #include <stdexcept>
 
-#include "TODOitem.h"
+#include "include/todo_item.h"
 
 using std::out_of_range;
 using std::invalid_argument;
 
-TEST(TODOitem, Can_Create) {
+TEST(TodoItem, Can_Create) {
     // Arrange
-    TODOitem* item;
+    TodoItem* item;
 
     // Act
-    item = new TODOitem();
+    item = new TodoItem();
 
     // Assert
     EXPECT_NE(nullptr, item);
@@ -22,12 +22,12 @@ TEST(TODOitem, Can_Create) {
     delete item;
 }
 
-TEST(TODOitem, Can_Create_By_Parameters) {
+TEST(TodoItem, Can_Create_By_Parameters) {
     // Arrange
-    TODOitem* item;
+    TodoItem* item;
 
     // Act
-    item = new TODOitem(3, "abc", "");
+    item = new TodoItem(3, "abc", "");
 
     // Assert
     EXPECT_NE(nullptr, item);
@@ -37,23 +37,23 @@ TEST(TODOitem, Can_Create_By_Parameters) {
 }
 
 
-TEST(TODOitem, Throws_When_Create_By_Invalid_Parameters) {
+TEST(TodoItem, Throws_When_Create_By_Invalid_Parameters) {
     // Arrange & Act & Assert
-    EXPECT_THROW(TODOitem(100, "", ""), invalid_argument);
+    EXPECT_THROW(TodoItem(100, "", ""), invalid_argument);
 }
 
 
-TEST(TODOitem, Can_Priority_Get) {
+TEST(TodoItem, Can_Priority_Get) {
     // Arrange
-    TODOitem item;
+    TodoItem item;
 
     // Act & Assert
-    EXPECT_EQ(TODOitem::DEFAULT_PRIORITY_VALUE, item.getPriority());
+    EXPECT_EQ(TodoItem::DEFAULT_PRIORITY_VALUE, item.getPriority());
 }
 
-TEST(TODOitem, Can_Priority_Set) {
+TEST(TodoItem, Can_Priority_Set) {
     // Arrange
-    TODOitem item;
+    TodoItem item;
 
     // Act
     item.setPriority(1);
@@ -62,17 +62,17 @@ TEST(TODOitem, Can_Priority_Set) {
     EXPECT_EQ(1, item.getPriority());
 }
 
-TEST(TODOitem, Can_Title_Get) {
+TEST(TodoItem, Can_Title_Get) {
     // Arrange
-    TODOitem item;
+    TodoItem item;
 
     // Act & Assert
     EXPECT_EQ("", item.getTitle());
 }
 
-TEST(TODOitem, Can_Title_Set) {
+TEST(TodoItem, Can_Title_Set) {
     // Arrange
-    TODOitem item;
+    TodoItem item;
 
     // Act
     item.setTitle("abc");
@@ -81,17 +81,17 @@ TEST(TODOitem, Can_Title_Set) {
     EXPECT_EQ("abc", item.getTitle());
 }
 
-TEST(TODOitem, Can_Text_Get) {
+TEST(TodoItem, Can_Text_Get) {
     // Arrange
-    TODOitem item;
+    TodoItem item;
 
     // Act & Assert
     EXPECT_EQ("", item.getText());
 }
 
-TEST(TODOitem, Can_Text_Set) {
+TEST(TodoItem, Can_Text_Set) {
     // Arrange
-    TODOitem item;
+    TodoItem item;
 
     // Act
     item.setText("abc");
@@ -100,10 +100,10 @@ TEST(TODOitem, Can_Text_Set) {
     EXPECT_EQ("abc", item.getText());
 }
 
-TEST(TODOitem, Can_Increase_Priority) {
+TEST(TodoItem, Can_Increase_Priority) {
     // Arrange
-    TODOitem item;
-    int expected_priority = TODOitem::DEFAULT_PRIORITY_VALUE - 1;
+    TodoItem item;
+    int expected_priority = TodoItem::DEFAULT_PRIORITY_VALUE - 1;
 
     // Act
     item.increasePriority();
@@ -112,10 +112,10 @@ TEST(TODOitem, Can_Increase_Priority) {
     EXPECT_EQ(expected_priority, item.getPriority());
 }
 
-TEST(TODOitem, Can_Decrease_Priority) {
+TEST(TodoItem, Can_Decrease_Priority) {
     // Arrange
-    TODOitem item;
-    int expected_priority = TODOitem::DEFAULT_PRIORITY_VALUE + 1;
+    TodoItem item;
+    int expected_priority = TodoItem::DEFAULT_PRIORITY_VALUE + 1;
 
     // Act
     item.decreasePriority();
@@ -124,10 +124,10 @@ TEST(TODOitem, Can_Decrease_Priority) {
     EXPECT_EQ(expected_priority, item.getPriority());
 }
 
-TEST(TODOitem, Can_Compare_Items_Title) {
+TEST(TodoItem, Can_Compare_Items_Title) {
     // Arrange
-    TODOitem item1;
-    TODOitem item2;
+    TodoItem item1;
+    TodoItem item2;
 
     // Act
     item1.setTitle("abc");
@@ -137,10 +137,10 @@ TEST(TODOitem, Can_Compare_Items_Title) {
     EXPECT_FALSE(item1 == item2);
 }
 
-TEST(TODOitem, Can_Compare_Items_Text) {
+TEST(TodoItem, Can_Compare_Items_Text) {
     // Arrange
-    TODOitem item1;
-    TODOitem item2;
+    TodoItem item1;
+    TodoItem item2;
 
     // Act
     item1.setText("abc");
@@ -150,10 +150,10 @@ TEST(TODOitem, Can_Compare_Items_Text) {
     EXPECT_FALSE(item1 == item2);
 }
 
-TEST(TODOitem, Can_Compare_Items_Priority) {
+TEST(TodoItem, Can_Compare_Items_Priority) {
     // Arrange
-    TODOitem item1;
-    TODOitem item2;
+    TodoItem item1;
+    TodoItem item2;
 
     // Act
     item1.setPriority(1);
@@ -163,27 +163,27 @@ TEST(TODOitem, Can_Compare_Items_Priority) {
     EXPECT_FALSE(item1 == item2);
 }
 
-TEST(TODOitem, Throws_When_Inc_Invalid_Priority) {
+TEST(TodoItem, Throws_When_Inc_Invalid_Priority) {
     // Arrange
-    TODOitem item1;
-    item1.setPriority(TODOitem::MIN_PRIORITY_VALUE);
+    TodoItem item1;
+    item1.setPriority(TodoItem::MIN_PRIORITY_VALUE);
 
     // Act & Assert
     EXPECT_THROW(item1.increasePriority(), out_of_range);
 }
 
-TEST(TODOitem, Throws_When_Dec_Invalid_Priority) {
+TEST(TodoItem, Throws_When_Dec_Invalid_Priority) {
     // Arrange
-    TODOitem item1;
-    item1.setPriority(TODOitem::MAX_PRIORITY_VALUE);
+    TodoItem item1;
+    item1.setPriority(TodoItem::MAX_PRIORITY_VALUE);
 
     // Act & Assert
     EXPECT_THROW(item1.decreasePriority(), out_of_range);
 }
 
-TEST(TODOitem, Throws_When_Set_Invalid_Priority) {
+TEST(TodoItem, Throws_When_Set_Invalid_Priority) {
     // Arrange
-    TODOitem item1;
+    TodoItem item1;
 
     // Act & Assert
     EXPECT_THROW(item1.setPriority(100500), invalid_argument);

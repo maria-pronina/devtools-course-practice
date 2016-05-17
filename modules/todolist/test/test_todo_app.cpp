@@ -1,12 +1,12 @@
 // Copyright 2016 Pronina Maria
 #include <gtest/gtest.h>
 #include <stdexcept>
-
-#include "TODOitem.h"
-#include <TODOlist.h>
-#include <TODOapp.h>
 #include <vector>
 #include <string>
+#include "include/todo_item.h"
+#include "include/todo_list.h"
+#include "include/todo_app.h"
+
 using ::testing::internal::RE;
 using std::vector;
 using std::string;
@@ -15,8 +15,8 @@ class TODOappTest : public ::testing::Test {
     // virtual void SetUp() {}
     void ActWithExistingFile(vector<string> args_) {
         vector<const char*> options;
-        TODOlist list;
-        TODOitem temp;
+        TodoList list;
+        TodoItem temp;
 
         temp.setTitle("abc");
         temp.setPriority(1);

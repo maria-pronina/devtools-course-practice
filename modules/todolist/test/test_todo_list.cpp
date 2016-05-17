@@ -4,18 +4,18 @@
 #include <vector>
 #include <stdexcept>
 
-#include "TODOlist.h"
+#include "include/todo_list.h"
 
 using std::vector;
 using std::out_of_range;
 using std::runtime_error;
 
-TEST(TODOlist, Can_Create) {
+TEST(TodoList, Can_Create) {
     // Arrange
-    TODOlist* list;
+    TodoList* list;
 
     // Act
-    list = new TODOlist();
+    list = new TodoList();
 
     // Assert
     EXPECT_NE(nullptr, list);
@@ -24,10 +24,10 @@ TEST(TODOlist, Can_Create) {
     delete list;
 }
 
-TEST(TODOlist, Can_Add_By_Item) {
+TEST(TodoList, Can_Add_By_Item) {
     // Arrange
-    TODOitem item;
-    TODOlist list;
+    TodoItem item;
+    TodoList list;
 
     item.setTitle("abc");
 
@@ -38,11 +38,11 @@ TEST(TODOlist, Can_Add_By_Item) {
     EXPECT_NE(-1, list.search("abc"));
 }
 
-TEST(TODOlist, Throw_When_Add_Existing_Title_By_Item) {
+TEST(TodoList, Throw_When_Add_Existing_Title_By_Item) {
     // Arrange
-    TODOitem item1;
-    TODOitem item2;
-    TODOlist list;
+    TodoItem item1;
+    TodoItem item2;
+    TodoList list;
 
     item1.setTitle("abc");
     item2.setTitle("abc");
@@ -54,9 +54,9 @@ TEST(TODOlist, Throw_When_Add_Existing_Title_By_Item) {
     EXPECT_THROW(list.addItem(item2), runtime_error);
 }
 
-TEST(TODOlist, Can_Add_By_Parameters) {
+TEST(TodoList, Can_Add_By_Parameters) {
     // Arrange
-    TODOlist list;
+    TodoList list;
 
     // Act
     list.addItem("abc", 2);
@@ -65,9 +65,9 @@ TEST(TODOlist, Can_Add_By_Parameters) {
     EXPECT_NE(-1, list.search("abc"));
 }
 
-TEST(TODOlist, Throw_When_Add_Existing_Title_By_Parameters) {
+TEST(TodoList, Throw_When_Add_Existing_Title_By_Parameters) {
     // Arrange
-    TODOlist list;
+    TodoList list;
 
     // Act
     list.addItem("abc");
@@ -76,9 +76,9 @@ TEST(TODOlist, Throw_When_Add_Existing_Title_By_Parameters) {
     EXPECT_THROW(list.addItem("abc"), runtime_error);
 }
 
-TEST(TODOlist, Can_Get_Size) {
+TEST(TodoList, Can_Get_Size) {
     // Arrange
-    TODOlist list;
+    TodoList list;
 
     // Act
     list.addItem("abc");
@@ -87,9 +87,9 @@ TEST(TODOlist, Can_Get_Size) {
     EXPECT_EQ(1, list.size());
 }
 
-TEST(TODOlist, Can_Get_Item) {
+TEST(TodoList, Can_Get_Item) {
     // Arrange
-    TODOlist list;
+    TodoList list;
 
     // Act
     list.addItem("abc");
@@ -100,19 +100,19 @@ TEST(TODOlist, Can_Get_Item) {
     EXPECT_EQ(list.getItem(1).getTitle(), "defg");
 }
 
-TEST(TODOlist, Throws_When_Get_By_Invalid_Pos) {
+TEST(TodoList, Throws_When_Get_By_Invalid_Pos) {
     // Arrange
-    TODOlist list;
+    TodoList list;
 
     // Act & Assert
     EXPECT_THROW(list.getItem(100500), out_of_range);
 }
 
-TEST(TODOlist, Can_Get_All) {
+TEST(TodoList, Can_Get_All) {
     // Arrange
-    TODOlist list;
-    vector<TODOitem> v;
-    TODOitem temp;
+    TodoList list;
+    vector<TodoItem> v;
+    TodoItem temp;
 
     // Act
     temp.setTitle("abc");
@@ -131,11 +131,11 @@ TEST(TODOlist, Can_Get_All) {
     EXPECT_EQ(list.getAll(), v);
 }
 
-TEST(TODOlist, Can_Get_By_Priority) {
+TEST(TodoList, Can_Get_By_Priority) {
     // Arrange
-    TODOlist list;
-    vector<TODOitem> v;
-    TODOitem temp;
+    TodoList list;
+    vector<TodoItem> v;
+    TodoItem temp;
 
     // Act
     temp.setTitle("abc");
@@ -156,11 +156,11 @@ TEST(TODOlist, Can_Get_By_Priority) {
     EXPECT_EQ(list.getByPriority(1), v);
 }
 
-TEST(TODOlist, Can_Save_Load) {
+TEST(TodoList, Can_Save_Load) {
     // Arrange
-    TODOlist listForSave, listForLoad;
-    vector<TODOitem> v;
-    TODOitem temp;
+    TodoList listForSave, listForLoad;
+    vector<TodoItem> v;
+    TodoItem temp;
 
     // Act
     temp.setTitle("abc");
@@ -184,23 +184,23 @@ TEST(TODOlist, Can_Save_Load) {
     // Assert
     EXPECT_EQ(listForLoad.getAll(), v);
 }
-TEST(TODOlist, Can_Not_Load_From_Non_Existing_File) {
+TEST(TodoList, Can_Not_Load_From_Non_Existing_File) {
     // Arrange
-    TODOlist listForLoad;
+    TodoList listForLoad;
     // Act and Assert
     EXPECT_THROW(listForLoad.load("todo1.list"), std::runtime_error);
 }
-TEST(TODOlist, Can_Not_Load_From_File_With_Empty_Name) {
+TEST(TodoList, Can_Not_Load_From_File_With_Empty_Name) {
     // Arrange
-    TODOlist listForLoad;
+    TodoList listForLoad;
     // Act and Assert
     EXPECT_THROW(listForLoad.load(""), std::runtime_error);
 }
-TEST(TODOlist, Can_Delete_By_Pos) {
+TEST(TodoList, Can_Delete_By_Pos) {
     // Arrange
-    TODOlist list;
-    vector<TODOitem> v;
-    TODOitem temp;
+    TodoList list;
+    vector<TodoItem> v;
+    TodoItem temp;
 
     // Act
     temp.setTitle("abc");
@@ -223,9 +223,9 @@ TEST(TODOlist, Can_Delete_By_Pos) {
     EXPECT_EQ(list.getAll(), v);
 }
 
-TEST(TODOlist, Throws_When_Delete_By_Invalid_Pos) {
+TEST(TodoList, Throws_When_Delete_By_Invalid_Pos) {
     // Arrange
-    TODOlist list;
+    TodoList list;
 
     // Act
     list.addItem("abc");
@@ -234,12 +234,12 @@ TEST(TODOlist, Throws_When_Delete_By_Invalid_Pos) {
     EXPECT_THROW(list.deleteItem(100500), out_of_range);
 }
 
-TEST(TODOlist, Can_Sort_By_Priority) {
+TEST(TodoList, Can_Sort_By_Priority) {
     // Arrange
-    TODOlist list;
-    TODOitem temp1;
-    TODOitem temp2;
-    vector<TODOitem> v;
+    TodoList list;
+    TodoItem temp1;
+    TodoItem temp2;
+    vector<TodoItem> v;
 
     // Act
     temp1.setTitle("abc");
