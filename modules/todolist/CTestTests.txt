@@ -67,16 +67,4 @@ add_test(
 set_tests_properties (${prefix}_can_Not_Print_Item_With_Wrong_File_Name
   PROPERTIES PASS_REGULAR_EXPRESSION "Can not open file")
 
-add_test(
-    NAME ${prefix}_can_Not_Print_With_Wrong_File_Name
-    COMMAND ${APPLICATION} print_all "" t
-)
-set_tests_properties (${prefix}_can_Not_Print_With_Wrong_File_Name
-  PROPERTIES PASS_REGULAR_EXPRESSION "Can not open file")
 
-add_test(
-    NAME ${prefix}_can_Not_Print_Priority_With_Wrong_File_Name
-    COMMAND ${APPLICATION} print_priority "-1"
-)
-set_tests_properties (${prefix}_can_Not_Print_Priority_With_Wrong_File_Name
-  PROPERTIES PASS_REGULAR_EXPRESSION "Can not open file")
