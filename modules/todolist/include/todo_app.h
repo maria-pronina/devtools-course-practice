@@ -28,6 +28,5 @@ class TodoApp {
         std::string newText;
         int priority;
     } Arguments;
-
 };
 #endif  // MODULES_TODOLIST_INCLUDE_TODO_APP_H_
