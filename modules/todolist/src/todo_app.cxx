@@ -22,7 +22,8 @@ void TodoApp::help(const char* appname, const char* message) {
 
         "1.  $ " + appname + " <file_operation> <file_name>\n\n " +
         "2. $ " + appname + " <item_operation> <file_name> <item_title>\n\n " +
-        "3. $ " + appname + " add_params <file_name> <item_title> <item_text> <item_priority>\n\n " +
+        "3. $ " + appname + " add_params <file_name> <item_title>"
+                +" <item_text> <item_priority>\n\n " +
         "4. $ " + appname + " print_priority <file_name> <item_priority> \n\n "
         "Where <file_operation> is one of 'print_all', 'create', " +
         "<item_operation> is one of 'add', 'delete', 'print_item' " +
@@ -35,16 +36,14 @@ bool TodoApp::validateNumberOfArguments(int argc, const char** argv) {
     if (argc == 1) {
         help(argv[0]);
         return false;
-    }
-    else if (argc >= 7) {
+    } else if (argc >= 7) {
         help(argv[0], "ERROR: Too much arguments.\n\n");
         return false;
     }
     return true;
 }
 bool TodoApp::validateArguments(int argc, const char** argv, Operations op) {
-    switch (op)
-    {
+    switch (op) {
     case Operations::ERROR:
         help(argv[0],
             "ERROR: Wrong operation name.\n\n");
@@ -52,43 +51,50 @@ bool TodoApp::validateArguments(int argc, const char** argv, Operations op) {
         break;
     case Operations::ADD:
         if (argc != 4) {
-            help(argv[0], "ERROR: Wrong arguments count for add operation.\n\n");
+            help(argv[0],
+                "ERROR: Wrong arguments count for add operation.\n\n");
             return false;
         }
         break;
     case Operations::ADDEXPAND:
         if (argc != 6) {
-            help(argv[0], "ERROR: Wrong arguments count for add_params operation.\n\n");
+            help(argv[0],
+                "ERROR: Wrong arguments count for add_params operation.\n\n");
             return false;
         }
         break;
     case Operations::CREATE:
         if (argc != 3) {
-            help(argv[0], "ERROR: Wrong arguments count for create operation.\n\n");
+            help(argv[0],
+                "ERROR: Wrong arguments count for create operation.\n\n");
             return false;
         }
         break;
     case Operations::DELETE:
         if (argc != 4) {
-            help(argv[0], "ERROR: Wrong arguments count for delete operation.\n\n");
+            help(argv[0],
+                "ERROR: Wrong arguments count for delete operation.\n\n");
             return false;
         }
         break;
     case Operations::PRINT:
         if (argc != 4) {
-            help(argv[0], "ERROR: Wrong arguments count for print_item operation.\n\n");
+            help(argv[0],
+             "ERROR: Wrong arguments count for print_item operation.\n\n");
             return false;
         }
         break;
     case Operations::PRINTALL:
         if (argc != 3) {
-            help(argv[0], "ERROR: Wrong arguments count for print_all operation.\n\n");
+            help(argv[0],
+             "ERROR: Wrong arguments count for print_all operation.\n\n");
             return false;
         }
         break;
     case Operations::PRIORITY:
         if (argc != 4) {
-            help(argv[0], "ERROR: Wrong arguments count for print_priority operation.\n\n");
+            help(argv[0],
+             "ERROR: Wrong arguments count for print_priority operation.\n\n");
             return false;
         }
         break;
@@ -125,7 +131,8 @@ std::string TodoApp::operator()(int argc, const char** argv) {
     switch (args.operation) {
     case Operations::ADD:
         args.itemName = argv[3];
-        stream << "Trying to add item \"" << args.itemName <<"\"..." << std::endl;
+        stream << "Trying to add item \""
+         << args.itemName <<"\"..." << std::endl;
         try {
             todo.addItem(args.itemName);
             todo.save(args.fileName);
@@ -138,7 +145,8 @@ std::string TodoApp::operator()(int argc, const char** argv) {
      case Operations::ADDEXPAND:
          args.itemName = argv[3];
          args.newText = argv[5];
-        stream << "Trying to add item \"" << args.itemName <<"\"..." << std::endl;
+        stream << "Trying to add item \""
+        << args.itemName <<"\"..." << std::endl;
         try {
             try {
                 args.priority = std::stoi(argv[5]);
@@ -164,11 +172,13 @@ std::string TodoApp::operator()(int argc, const char** argv) {
          stream << "Trying to create file \"" << args.fileName
                 << "\"..." << std::endl;
          todo.save(args.fileName);
-         stream << "File \"" << args.fileName << "\"has been created" << std::endl;
+         stream << "File \"" << args.fileName
+          << "\"has been created" << std::endl;
          break;
     case Operations::DELETE:
         args.itemName = argv[3];
-        stream << "Trying to delete item \"" << args.itemName << "\"..." << std::endl;
+        stream << "Trying to delete item \""
+        << args.itemName << "\"..." << std::endl;
         try {
             todo.deleteItem(todo.search(args.itemName));
             todo.save(args.fileName);
