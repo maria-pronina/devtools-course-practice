@@ -6,11 +6,11 @@
 #include "include/todo_list.h"
 const std::map<std::string, Operations> kOperations {
     {"add", Operations::ADD},
-    {"add_params", Operations::ADDEXPAND},
+    {"add_params", Operations::ADD_EXPAND},
     {"create", Operations::CREATE},
     {"print_item", Operations::PRINT},
     {"delete", Operations::DELETE},
-    {"print_all", Operations::PRINTALL},
+    {"print_all", Operations::PRINT_ALL},
     {"print_priority", Operations::PRIORITY}
 };
 TodoApp::TodoApp() : message_("") {}
@@ -56,7 +56,7 @@ bool TodoApp::validateArguments(int argc, const char** argv, Operations op) {
             return false;
         }
         break;
-    case Operations::ADDEXPAND:
+    case Operations::ADD_EXPAND:
         if (argc != 6) {
             help(argv[0],
                 "ERROR: Wrong arguments count for add_params operation.\n\n");
@@ -84,7 +84,7 @@ bool TodoApp::validateArguments(int argc, const char** argv, Operations op) {
             return false;
         }
         break;
-    case Operations::PRINTALL:
+    case Operations::PRINT_ALL:
         if (argc != 3) {
             help(argv[0],
              "ERROR: Wrong arguments count for print_all operation.\n\n");
@@ -142,7 +142,7 @@ std::string TodoApp::operator()(int argc, const char** argv) {
                         "- item with this title already existed!" << std::endl;
         }
         break;
-     case Operations::ADDEXPAND:
+     case Operations::ADD_EXPAND:
          args.itemName = argv[3];
          args.newText = argv[5];
         stream << "Trying to add item \""
@@ -202,7 +202,7 @@ std::string TodoApp::operator()(int argc, const char** argv) {
         stream << item.getText() << std::endl;
     }
     break;
-    case Operations::PRINTALL: {
+    case Operations::PRINT_ALL: {
         auto items = todo.getAll();
         for (auto it = items.begin(); it != items.end(); ++it) {
             stream << (*it).getTitle() << " "
