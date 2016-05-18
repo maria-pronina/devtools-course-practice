@@ -4,8 +4,7 @@
 #include <include/todo_list.h>
 #include <string>
 
-enum class Operations
-{
+enum class Operations {
     ERROR, ADD, ADDEXPAND, CREATE, DELETE,
     PRINT, PRINTALL, PRIORITY
 };
@@ -21,10 +20,11 @@ class TodoApp {
     bool validateItemOperation(int argc, const char** argv);
     bool validateArguments(int argc, const char** argv, Operations op);
     Operations parseOperation(string operation);
-    std::string message_;    typedef struct {
+    std::string message_;
+    typedef struct {
         Operations operation;
         std::string fileName;
-        std::string itemName;        
+        std::string itemName;
         std::string newText;
         int priority;
     } Arguments;
