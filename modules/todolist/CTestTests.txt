@@ -28,28 +28,28 @@ add_test(
     COMMAND ${APPLICATION} add ""
 )
 set_tests_properties (${prefix}_can_Not_Add_With_Wrong_Arguments_Count
-  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for item operation")
+  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for add operation")
 
 add_test(
     NAME ${prefix}_can_Not_Print_Item_With_Wrong_Arguments_Count
     COMMAND ${APPLICATION} print_item ""
 )
 set_tests_properties (${prefix}_can_Not_Print_Item_With_Wrong_Arguments_Count
-  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for item operation")
+  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for print_item operation")
 
 add_test(
     NAME ${prefix}_can_Not_Delete_With_Wrong_Arguments_Count
     COMMAND ${APPLICATION} delete ""
 )
 set_tests_properties (${prefix}_can_Not_Delete_With_Wrong_Arguments_Count
-  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for item operation")
+  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for delete operation")
 
 add_test(
     NAME ${prefix}_can_Not_Print_File_With_Wrong_Arguments_Count
     COMMAND ${APPLICATION} print_all
 )
 set_tests_properties (${prefix}_can_Not_Print_File_With_Wrong_Arguments_Count
-  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for file operation")
+  PROPERTIES PASS_REGULAR_EXPRESSION "ERROR: Wrong arguments count for print_all operation")
 
 add_test(
     NAME ${prefix}_can_Not_Add_With_Wrong_File_Name
