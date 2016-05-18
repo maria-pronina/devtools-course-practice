@@ -155,6 +155,11 @@ TEST_F(TODOappTest, Can_Add_Item_With_Params) {
     ActWithExistingFile(args);
     Assert("Item has been added");
 }
+TEST_F(TODOappTest, Can_Not_Add_Item_With_Params_With_Wrong_Count_Arguments) {
+    vector<string> args = { "add_params", "test.txt", "xyfz", "text" };
+    ActWithExistingFile(args);
+    Assert("ERROR: Wrong arguments count for add_params operation");
+}
 TEST_F(TODOappTest, Can_Not_Add_Item_With_Not_Number_Priority) {
     vector<string> args = { "add_params", "test.txt", "xyz", "abc", "text" };
     ActWithExistingFile(args);
@@ -166,7 +171,12 @@ TEST_F(TODOappTest, Can_Not_Add_Item_With_Negative_Priority) {
     Assert("Can not add item");
 }
 TEST_F(TODOappTest, Can_Not_Add_With_Params_Existing_Item) {
-    vector<string> args = { "add_params", "test.txt", "abc", "1", "text" };
+    vector<string> args = { "add_params", "test.txt", "abc", "text", "1" };
+    ActWithExistingFile(args);
+    Assert("Can not add item");
+}
+TEST_F(TODOappTest, Can_Not_Add_With_Wrong_Priority) {
+    vector<string> args = { "add_params", "test.txt", "abc", "text", "-1" };
     ActWithExistingFile(args);
     Assert("Can not add item");
 }
@@ -175,10 +185,26 @@ TEST_F(TODOappTest, Can_Not_Add_Existing_Item) {
     ActWithExistingFile(args);
     Assert("Can not add item");
 }
-TEST_F(TODOappTest, Can_Create) {
+TEST_F(TODOappTest, Can_Create_Todo_File) {
     vector<string> args = { "create", "test1.txt"};
     Act(args);
     Assert("File \"test1.txt\"has been created.*");
+}
+TEST_F(TODOappTest, Can_Not_Create_Todo_File_With_Wrong_Arguments_Count) {
+    vector<string> args = { "create"};
+    Act(args);
+    Assert("ERROR: Wrong arguments count for create operation");
+}
+TEST_F(TODOappTest, Can_Print_About_Wrong_Operation) {
+    vector<string> args = { "todo", "file.txt" };
+    Act(args);
+    Assert("ERROR: Wrong operation name");
+}
+TEST_F(TODOappTest, Can_Print_About_Too_Much_Argumets) {
+    vector<string> args = { "todo", "file.txt", "todo", "todo",
+                             "todo", "todo" };
+    Act(args);
+    Assert("ERROR: Too much arguments");
 }
 TEST_F(TODOappTest, Can_Delete_Item) {
     vector<string> args = { "delete", "test.txt", "abc" };
@@ -204,6 +230,11 @@ TEST_F(TODOappTest, Can_Print_Negative_Priority) {
     vector<string> args = { "print_priority", "test.txt", "-4" };
     ActWithExistingFile(args);
     Assert("List does not contains items with this priority");
+}
+TEST_F(TODOappTest, Can_Not_Print_Priority_With_Wrong_Arguments_Count) {
+    vector<string> args = { "print_priority", "test.txt", "-4", "10" };
+    ActWithExistingFile(args);
+    Assert("ERROR: Wrong arguments count for print_priority operation");
 }
 TEST_F(TODOappTest, Can_Not_Print_Non_Number_Priority) {
     vector<string> args = { "print_priority", "test.txt", "abc" };
