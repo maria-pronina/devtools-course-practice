@@ -42,10 +42,6 @@ class TODOappTest : public ::testing::Test {
         int argc = static_cast<int>(args_.size()) + 1;
 
         output_ = app_(argc, argv);
-        if(output_ == "")
-        {
-            int i = 0;
-        }
     }
 
     void Act(vector<string> args_) {
@@ -70,7 +66,6 @@ class TODOappTest : public ::testing::Test {
              return ::testing::AssertionFailure()
              << "\nOutput:\n" << output
              << "\n\nRegex:\n" << expected << "\n";
-
     }
     void Assert(std::string expected) {
         EXPECT_TRUE(IsMatch(output_, expected));
