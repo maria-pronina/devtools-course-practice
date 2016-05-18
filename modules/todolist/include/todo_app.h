@@ -5,8 +5,8 @@
 #include <string>
 
 enum class Operations {
-    ERROR, ADD, ADDEXPAND, CREATE, DELETE,
-    PRINT, PRINTALL, PRIORITY
+    ERROR, ADD, ADD_EXPAND, CREATE, DELETE,
+    PRINT, PRINT_ALL, PRIORITY
 };
 class TodoApp {
  public:
