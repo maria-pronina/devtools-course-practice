@@ -78,10 +78,21 @@ add_test(
 )
 set_tests_properties (${prefix}_can_Add_Item
   PROPERTIES PASS_REGULAR_EXPRESSION "Item has been added")
-
+add_test(
+    NAME ${prefix}_can_Not_Add_Existing_Item
+    COMMAND ${APPLICATION} add "test/data/test.txt" "abc"
+)
+set_tests_properties (${prefix}_can_Not_Add_Existing_Item
+  PROPERTIES PASS_REGULAR_EXPRESSION "Can not add item")
 add_test(
     NAME ${prefix}_can_Delete_Item
     COMMAND ${APPLICATION} delete "test/data/test.txt" t
 )
 set_tests_properties (${prefix}_can_Delete_Item
   PROPERTIES PASS_REGULAR_EXPRESSION "Item has been deleted")
+add_test(
+    NAME ${prefix}_can_Not_Delete_Non_Existing_Item
+    COMMAND ${APPLICATION} delete "test/data/test.txt" "abc1"
+)
+set_tests_properties (${prefix}_can_Not_Delete_Non_Existing_Item
+  PROPERTIES PASS_REGULAR_EXPRESSION "Could not delete item")
