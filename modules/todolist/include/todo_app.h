@@ -4,8 +4,11 @@
 #include <include/todo_list.h>
 #include <string>
 
-enum ArgumentsNames { ERROR, ADD, ADDEXPAND, CREATE, DELETE,
-                    PRINT, PRINTALL, PRIORITY};
+enum class Operations
+{
+    ERROR, ADD, ADDEXPAND, CREATE, DELETE,
+    PRINT, PRINTALL, PRIORITY
+};
 class TodoApp {
  public:
     TodoApp();
@@ -14,18 +17,17 @@ class TodoApp {
  private:
     void help(const char* appname, const char* message = "");
     bool validateNumberOfArguments(int argc, const char** argv);
-    bool validateArguments(int argc, const char** argv);
     bool validateFileOperation(int argc, const char** argv);
     bool validateItemOperation(int argc, const char** argv);
-    ArgumentsNames parseOperation(string operation);
-    std::string message_;
-    typedef struct {
-        std::string operation;
+    bool validateArguments(int argc, const char** argv, Operations op);
+    Operations parseOperation(string operation);
+    std::string message_;    typedef struct {
+        Operations operation;
         std::string fileName;
-        std::string itemName;
-        std::string newTitle;
+        std::string itemName;        
         std::string newText;
         int priority;
     } Arguments;
+
 };
 #endif  // MODULES_TODOLIST_INCLUDE_TODO_APP_H_

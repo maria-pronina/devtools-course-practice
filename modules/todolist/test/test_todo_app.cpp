@@ -42,6 +42,10 @@ class TODOappTest : public ::testing::Test {
         int argc = static_cast<int>(args_.size()) + 1;
 
         output_ = app_(argc, argv);
+        if(output_ == "")
+        {
+            int i = 0;
+        }
     }
 
     void Act(vector<string> args_) {
@@ -58,12 +62,22 @@ class TODOappTest : public ::testing::Test {
         output_ = app_(argc, argv);
     }
 
+    ::testing::AssertionResult IsMatch(std::string output,
+        std::string expected) {
+        if (RE::PartialMatch(output, RE(expected)))
+            return ::testing::AssertionSuccess();
+        else
+             return ::testing::AssertionFailure()
+             << "\nOutput:\n" << output
+             << "\n\nRegex:\n" << expected << "\n";
+
+    }
     void Assert(std::string expected) {
-        EXPECT_TRUE(RE::PartialMatch(output_, RE(expected)));
+        EXPECT_TRUE(IsMatch(output_, expected));
     }
 
  private:
-    TODOapp app_;
+    TodoApp app_;
     string output_;
 };
 TEST_F(TODOappTest, Can_Print_Help_With_Empty_Argumens) {
@@ -72,49 +86,49 @@ TEST_F(TODOappTest, Can_Print_Help_With_Empty_Argumens) {
     Assert("This is a todo list application.*");
 }
 TEST_F(TODOappTest, Can_Not_Add_With_Wrong_Arguments_Count) {
-    vector<string> args = {"add", ""};
+    vector<string> args = {"add"};
     Act(args);
-    Assert("ERROR: Wrong arguments count for item operation.*");
+    Assert("ERROR: Wrong arguments count for add operation.*");
 }
 TEST_F(TODOappTest, Can_Not_Delete_With_Wrong_Arguments_Count) {
-    vector<string> args = { "delete", "" };
+    vector<string> args = { "delete" };
     Act(args);
-    Assert("ERROR: Wrong arguments count for item operation.*");
+    Assert("ERROR: Wrong arguments count for delete operation.*");
 }
 TEST_F(TODOappTest, Can_Not_Print_Item_With_Wrong_Arguments_Count) {
-    vector<string> args = { "print_item", "" };
+    vector<string> args = { "print_item"};
     Act(args);
-    Assert("ERROR: Wrong arguments count for item operation.*");
+    Assert("ERROR: Wrong arguments count for print_item operation");
 }
 TEST_F(TODOappTest, Can_Not_Print_File_With_Wrong_Arguments_Count) {
     vector<string> args = { "print_all" };
     Act(args);
-    Assert("ERROR: Wrong arguments count for file operation.*");
+    Assert("ERROR: Wrong arguments count for print_all operation");
 }
 TEST_F(TODOappTest, Can_Not_Add_With_Wrong_File_Name) {
-    vector<string> args = { "add", "", "t" };
+    vector<string> args = { "add", "6", "t" };
     Act(args);
-    Assert("Can not open file .*");
+    Assert(".*Can not open file");
 }
 TEST_F(TODOappTest, Can_Not_Delete_With_Wrong_File_Name) {
-    vector<string> args = { "delete", "", "t" };
+    vector<string> args = { "delete", "6", "t" };
     Act(args);
-    Assert("Can not open file .*");
+    Assert("Can not open file");
 }
 TEST_F(TODOappTest, Can_Not_Print_Item_With_Wrong_File_Name) {
-    vector<string> args = { "print_item", "", "t" };
+    vector<string> args = { "print_item", "6", "t" };
     Act(args);
-    Assert("Can not open file .*");
+    Assert("Can not open file");
 }
 TEST_F(TODOappTest, Can_Not_Print_With_Wrong_File_Name) {
-    vector<string> args = { "print_all", "" };
+    vector<string> args = { "print_all", "6" };
     Act(args);
-    Assert("Can not open file .*");
+    Assert("Can not open file");
 }
 TEST_F(TODOappTest, Can_Not_Print_Priority_With_Wrong_File_Name) {
-    vector<string> args = { "print_priority", "-1", "-1"};
+    vector<string> args = { "print_priority", "6", "-1"};
     Act(args);
-    Assert("Can not open file .*");
+    Assert("Can not open file");
 }
 TEST_F(TODOappTest, Can_Print_All) {
     vector<string> args = { "print_all", "test.txt" };
@@ -134,37 +148,37 @@ TEST_F(TODOappTest, Can_Print_Item_With_Text) {
 TEST_F(TODOappTest, Can_Not_Print_Non_Existing_Item) {
     vector<string> args = { "print_item", "test.txt", "xyz" };
     ActWithExistingFile(args);
-    Assert("Item with this title does not exist!.*");
+    Assert("Item with this title does not exist!");
 }
 TEST_F(TODOappTest, Can_Add_Item) {
-    vector<string> args = { "add", "test.txt", "xyz" };
+    vector<string> args = { "add", "test.txt", "x1yz" };
     ActWithExistingFile(args);
-    Assert("Item has been added.*");
+    Assert("Item has been added");
 }
 TEST_F(TODOappTest, Can_Add_Item_With_Params) {
-    vector<string> args = { "add_params", "test.txt", "xyz", "5", "text" };
+    vector<string> args = { "add_params", "test.txt", "xyfz", "text", "5" };
     ActWithExistingFile(args);
-    Assert("Item has been added.*");
+    Assert("Item has been added");
 }
 TEST_F(TODOappTest, Can_Not_Add_Item_With_Not_Number_Priority) {
     vector<string> args = { "add_params", "test.txt", "xyz", "abc", "text" };
     ActWithExistingFile(args);
-    Assert("Can not add item .*");
+    Assert("Can not add item");
 }
 TEST_F(TODOappTest, Can_Not_Add_Item_With_Negative_Priority) {
     vector<string> args = { "add_params", "test.txt", "xyz", "-5", "text" };
     ActWithExistingFile(args);
-    Assert("Can not add item .*");
+    Assert("Can not add item");
 }
 TEST_F(TODOappTest, Can_Not_Add_With_Params_Existing_Item) {
     vector<string> args = { "add_params", "test.txt", "abc", "1", "text" };
     ActWithExistingFile(args);
-    Assert("Can not add item .*");
+    Assert("Can not add item");
 }
 TEST_F(TODOappTest, Can_Not_Add_Existing_Item) {
     vector<string> args = { "add", "test.txt", "abc"};
     ActWithExistingFile(args);
-    Assert("Can not add item .*");
+    Assert("Can not add item");
 }
 TEST_F(TODOappTest, Can_Create) {
     vector<string> args = { "create", "test1.txt"};
@@ -174,12 +188,12 @@ TEST_F(TODOappTest, Can_Create) {
 TEST_F(TODOappTest, Can_Delete_Item) {
     vector<string> args = { "delete", "test.txt", "abc" };
     Act(args);
-    Assert("Item has been deleted.*");
+    Assert("Item has been deleted");
 }
 TEST_F(TODOappTest, Can_Not_Delete_Non_Existing_Item) {
     vector<string> args = { "delete", "test.txt", "xyz" };
     Act(args);
-    Assert("Could not delete item.*");
+    Assert("Could not delete item");
 }
 TEST_F(TODOappTest, Can_Print_Priority) {
     vector<string> args = { "print_priority", "test.txt", "1" };
