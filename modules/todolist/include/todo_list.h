@@ -1,4 +1,4 @@
-// Copyright 2016 Podchishaeva Mary
+// Copyright 2016 Podchishaeva Mary, Pronina Mary
 #ifndef MODULES_TODOLIST_INCLUDE_TODO_LIST_H_
 #define MODULES_TODOLIST_INCLUDE_TODO_LIST_H_
 

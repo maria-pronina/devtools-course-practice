@@ -1,4 +1,4 @@
-// Copyright 2016 Podchischaeva Mary
+// Copyright 2016 Podchischaeva Mary, Pronina Mary
 
 #include "include/todo_list.h"
 #include <fstream>

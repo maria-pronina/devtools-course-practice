@@ -1,4 +1,4 @@
-// Copyright 2016 Podchischaeva Mary
+// Copyright 2016 Podchischaeva Mary, Pronina Mary
 
 #include <gtest/gtest.h>
 #include <vector>
