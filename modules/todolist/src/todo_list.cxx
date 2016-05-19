@@ -125,6 +125,3 @@ vector<TodoItem> TodoList::sortByPriority() {
     sort(data_.begin(), data_.end(), TodoItem::priorityCompare);
     return data_;
 }
-
-TodoList::~TodoList() {
-}

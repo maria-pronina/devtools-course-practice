@@ -31,7 +31,7 @@ class TodoList {
 
     void deleteItem(size_t pos);
 
-    ~TodoList();
+
 
  private:
     vector<TodoItem> data_;
