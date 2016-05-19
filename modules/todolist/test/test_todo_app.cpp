@@ -200,7 +200,7 @@ TEST_F(TodoAppTest, Can_Print_About_Wrong_Operation) {
     Act(args);
     Assert("ERROR: Wrong operation name");
 }
-TEST_F(TodoAppTest, Can_Print_About_Too_Much_Argumets) {
+TEST_F(TodoAppTest, Can_Print_About_Too_Much_Arguments) {
     vector<string> args = { "todo", "file.txt", "todo", "todo",
                              "todo", "todo" };
     Act(args);
