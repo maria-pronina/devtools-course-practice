@@ -9,6 +9,8 @@ using std::string;
 using std::out_of_range;
 using std::invalid_argument;
 
+const int TodoItem::DEFAULT_PRIORITY_VALUE;
+
 TodoItem::TodoItem() {
     this->priority_ = DEFAULT_PRIORITY_VALUE;
     this->title_ = "";
