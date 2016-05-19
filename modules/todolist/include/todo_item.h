@@ -36,7 +36,6 @@ class TodoItem {
     int priority_;
     string title_;
     string text_;
-
 };
 
 #endif  // MODULES_TODOLIST_INCLUDE_TODO_ITEM_H_
