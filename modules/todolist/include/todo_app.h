@@ -16,8 +16,6 @@ class TodoApp {
  private:
     void help(const char* appname, const char* message = "");
     bool validateNumberOfArguments(int argc, const char** argv);
-    bool validateFileOperation(int argc, const char** argv);
-    bool validateItemOperation(int argc, const char** argv);
     bool validateArguments(int argc, const char** argv, Operations op);
     Operations parseOperation(string operation);
     std::string message_;
