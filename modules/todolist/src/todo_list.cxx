@@ -21,7 +21,7 @@ TodoList::TodoList() {
 
 void TodoList::addItem(TodoItem value) {
     if (search(value.getTitle()) < 0) {
-        this->data.push_back(value);
+        this->data_.push_back(value);
     } else {
         throw runtime_error("Add item with existing title!");
     }
@@ -32,33 +32,33 @@ void TodoList::addItem(string title,
         string text) {
     TodoItem temp(priority, title, text);
     if (search(temp.getTitle()) < 0) {
-        this->data.push_back(temp);
+        this->data_.push_back(temp);
     } else {
         throw runtime_error("Add item with existing title!");
     }
 }
 
 size_t TodoList::size() {
-    return this->data.size();
+    return this->data_.size();
 }
 
 TodoItem TodoList::getItem(size_t pos) {
-    if (pos >= data.size()) {
+    if (pos >= data_.size()) {
         throw out_of_range("Out of range!");
     } else {
-        return data[pos];
+        return data_[pos];
     }
 }
 
 vector<TodoItem> TodoList::getAll() {
-    return this->data;
+    return this->data_;
 }
 
 vector<TodoItem> TodoList::getByPriority(int priority) {
     vector<TodoItem> res;
-    for (size_t i = 0; i < data.size(); ++i) {
-        if (data[i].getPriority() == priority) {
-            res.push_back(data[i]);
+    for (size_t i = 0; i < data_.size(); ++i) {
+        if (data_[i].getPriority() == priority) {
+            res.push_back(data_[i]);
         }
     }
     return res;
@@ -66,8 +66,8 @@ vector<TodoItem> TodoList::getByPriority(int priority) {
 
 int TodoList::search(string title) {
     int res = -1;
-    for (size_t i = 0; i < data.size(); ++i) {
-        if (data[i].getTitle() == title) {
+    for (size_t i = 0; i < data_.size(); ++i) {
+        if (data_[i].getTitle() == title) {
             res = i;
             break;
         }
@@ -78,11 +78,11 @@ int TodoList::search(string title) {
 void TodoList::save(string filename) {
     ofstream file;
     file.open(filename);
-    file << data.size() << "\n";
-    for (size_t i = 0; i < data.size(); ++i) {
-        file << data[i].getPriority() << "\n";
-        file << data[i].getTitle() << "\n";
-        file << data[i].getText() << "\n";
+    file << data_.size() << "\n";
+    for (size_t i = 0; i < data_.size(); ++i) {
+        file << data_[i].getPriority() << "\n";
+        file << data_[i].getTitle() << "\n";
+        file << data_[i].getText() << "\n";
     }
     file.close();
 }
@@ -95,8 +95,8 @@ void TodoList::load(string filename) {
     size_t size;
     file >> size;
     file.get();
-    data.clear();
-    data.resize(size);
+    data_.clear();
+    data_.resize(size);
     for (size_t i = 0; i < size; ++i) {
         int p;
         file >> p;
@@ -108,22 +108,22 @@ void TodoList::load(string filename) {
         item.setPriority(p);
         item.setTitle(line1);
         item.setText(line2);
-        data[i] = item;
+        data_[i] = item;
     }
     file.close();
 }
 
 void TodoList::deleteItem(size_t pos) {
-    if (pos >= data.size()) {
+    if (pos >= data_.size()) {
         throw out_of_range("Out of range!");
     } else {
-        data.erase(data.begin()+pos);
+        data_.erase(data_.begin()+pos);
     }
 }
 
 vector<TodoItem> TodoList::sortByPriority() {
-    sort(data.begin(), data.end(), TodoItem::priorityCompare);
-    return data;
+    sort(data_.begin(), data_.end(), TodoItem::priorityCompare);
+    return data_;
 }
 
 TodoList::~TodoList() {

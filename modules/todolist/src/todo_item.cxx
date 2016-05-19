@@ -12,9 +12,9 @@ using std::invalid_argument;
 const int TodoItem::DEFAULT_PRIORITY_VALUE;
 
 TodoItem::TodoItem() {
-    this->priority = DEFAULT_PRIORITY_VALUE;
-    this->title = "";
-    this->text = "";
+    this->priority_ = DEFAULT_PRIORITY_VALUE;
+    this->title_ = "";
+    this->text_ = "";
 }
 
 TodoItem::TodoItem(int priority_val, string title_val, string text_val) {
@@ -22,62 +22,62 @@ TodoItem::TodoItem(int priority_val, string title_val, string text_val) {
             (priority_val < MIN_PRIORITY_VALUE)) {
         throw invalid_argument("Invalid priority!");
     } else {
-        this->priority = priority_val;
-        this->title = title_val;
-        this->text = text_val;
+        this->priority_ = priority_val;
+        this->title_ = title_val;
+        this->text_ = text_val;
     }
 }
 
 int TodoItem::getPriority() const {
-    return this->priority;
+    return this->priority_;
 }
 
 void TodoItem::setPriority(int value) {
     if (value >= MIN_PRIORITY_VALUE && value <= MAX_PRIORITY_VALUE) {
-        this->priority = value;
+        this->priority_ = value;
     } else {
         throw invalid_argument("Invalid argument!");
     }
 }
 
 void TodoItem::setTitle(string value) {
-    this->title = value;
+    this->title_ = value;
 }
 
 string TodoItem::getTitle() const {
-    return this->title;
+    return this->title_;
 }
 
 void TodoItem::setText(string value) {
-    this->text = value;
+    this->text_ = value;
 }
 
 string TodoItem::getText() const {
-    return this->text;
+    return this->text_;
 }
 
 void TodoItem::increasePriority() {
-    if (this->priority > MIN_PRIORITY_VALUE) {
-        this->priority--;
+    if (this->priority_ > MIN_PRIORITY_VALUE) {
+        this->priority_--;
     } else {
         throw out_of_range("Out of range!");
     }
 }
 
 void TodoItem::decreasePriority() {
-    if (this->priority < MAX_PRIORITY_VALUE) {
-        this->priority++;
+    if (this->priority_ < MAX_PRIORITY_VALUE) {
+        this->priority_++;
     } else {
         throw out_of_range("Out of range!");
     }
 }
 
 bool TodoItem::operator==(const TodoItem &a) const {
-    if (this->title != a.getTitle()) {
+    if (this->title_ != a.getTitle()) {
         return false;
-    } else if (this->text != a.getText()) {
+    } else if (this->text_ != a.getText()) {
         return false;
-    } else if (this->priority != a.getPriority()) {
+    } else if (this->priority_ != a.getPriority()) {
         return false;
     } else {
         return true;
@@ -85,7 +85,7 @@ bool TodoItem::operator==(const TodoItem &a) const {
 }
 
 bool TodoItem::priorityCompare(const TodoItem &l, const TodoItem &r) {
-    return (l.priority < r.priority);
+    return (l.priority_ < r.priority_);
 }
 
 TodoItem::~TodoItem() {

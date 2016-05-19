@@ -9,16 +9,13 @@
 using std::vector;
 
 class TodoList {
- private:
-    vector<TodoItem> data;
-
  public:
     TodoList();
 
     void addItem(TodoItem value);
     void addItem(string title,
-            int priority = TodoItem::DEFAULT_PRIORITY_VALUE,
-            string text = "");
+        int priority = TodoItem::DEFAULT_PRIORITY_VALUE,
+        string text = "");
 
     size_t size();
 
@@ -35,6 +32,9 @@ class TodoList {
     void deleteItem(size_t pos);
 
     ~TodoList();
+
+ private:
+    vector<TodoItem> data_;
 };
 
 #endif  // MODULES_TODOLIST_INCLUDE_TODO_LIST_H_

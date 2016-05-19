@@ -7,11 +7,6 @@
 using std::string;
 
 class TodoItem {
- private:
-    int priority;
-    string title;
-    string text;
-
  public:
     static const int DEFAULT_PRIORITY_VALUE = 3;
     static const int MAX_PRIORITY_VALUE = 5;
@@ -36,6 +31,12 @@ class TodoItem {
     static bool priorityCompare(const TodoItem &l, const TodoItem &r);
 
     ~TodoItem();
+
+ private:
+    int priority_;
+    string title_;
+    string text_;
+
 };
 
 #endif  // MODULES_TODOLIST_INCLUDE_TODO_ITEM_H_
