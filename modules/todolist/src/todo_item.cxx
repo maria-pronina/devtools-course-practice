@@ -9,8 +9,6 @@ using std::string;
 using std::out_of_range;
 using std::invalid_argument;
 
-const int TodoItem::DEFAULT_PRIORITY_VALUE;
-
 TodoItem::TodoItem() {
     this->priority_ = DEFAULT_PRIORITY_VALUE;
     this->title_ = "";
@@ -73,11 +71,11 @@ void TodoItem::decreasePriority() {
 }
 
 bool TodoItem::operator==(const TodoItem &a) const {
-    if (this->title_ != a.getTitle()) {
+    if (this->title_ != a.title_) {
         return false;
-    } else if (this->text_ != a.getText()) {
+    } else if (this->text_ != a.text_) {
         return false;
-    } else if (this->priority_ != a.getPriority()) {
+    } else if (this->priority_ != a.priority_) {
         return false;
     } else {
         return true;
@@ -87,7 +85,3 @@ bool TodoItem::operator==(const TodoItem &a) const {
 bool TodoItem::priorityCompare(const TodoItem &l, const TodoItem &r) {
     return (l.priority_ < r.priority_);
 }
-
-TodoItem::~TodoItem() {
-}
-

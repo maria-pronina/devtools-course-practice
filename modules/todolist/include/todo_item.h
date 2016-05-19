@@ -30,8 +30,6 @@ class TodoItem {
     bool operator==(const TodoItem &a) const;
     static bool priorityCompare(const TodoItem &l, const TodoItem &r);
 
-    ~TodoItem();
-
  private:
     int priority_;
     string title_;

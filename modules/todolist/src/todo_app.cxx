@@ -109,7 +109,8 @@ Operations TodoApp::parseOperation(std::string operation) {
 }
 
 std::string TodoApp::operator()(int argc, const char** argv) {
-    Arguments args;    TodoList todo;
+    Arguments args;
+    TodoList todo;
     if (!validateNumberOfArguments(argc, argv))
         return message_;
     args.operation = parseOperation(argv[1]);
